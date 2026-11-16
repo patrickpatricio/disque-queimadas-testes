@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disque Denúncia Queimadas - Betim</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <div class="marca">
+            <span class="logo-fogo">🔥</span>
+            <div>
+                <h1>Disque Denúncia Queimadas</h1>
+                <span>Monitoramento de focos de queimada — Betim / MG</span>
+            </div>
+        </div>
+        <nav>
+            <button class="btn-aba ativa" onclick="mudarAba('aba-inicio', this)">Início</button>
+            <button class="btn-aba" onclick="mudarAba('aba-sobre', this)">Sobre o Projeto</button>
+            <button class="btn-aba" onclick="mudarAba('aba-dashboard', this)">Dashboard</button>
+            <button class="btn-aba" onclick="mudarAba('aba-nasa', this)">Satélite NASA</button>
+        </nav>
+    </header>
+    <main>
+        <!-- ================== ABA 1 - INÍCIO ================== -->
+        <div id="aba-inicio" class="conteudo-aba ativa">
+            <div id="sidebar">
+                <h2>Registrar Ocorrência</h2>
+                <p class="intro">Insira novos focos validados pela fiscalização para atualizar o mapa de calor da cidade.</p>
+                <form id="formOcorrencias">
+                    <label for="comboBairros">Bairro / Região afetada:</label>
+                    <select name="codigo_regiao" id="comboBairros" required>
+                        <option value="">Carregando bairros...</option>
+                    </select>
+
+                    <label for="qtdFocos">Quantidade de focos:</label>
+                    <input type="number" name="quantidade" id="qtdFocos" min="1" required placeholder="Ex: 5">
+
+                    <label for="endereco">Endereço / referência do local:</label>
+                    <input type="text" name="endereco" id="endereco" required
+                        placeholder="Ex: Rua das Flores, lote vago próx. ao nº 120">
+
+                    <label for="imagem">Foto do local (opcional):</label>
+                    <input type="file" name="imagem" id="imagem" accept="image/*">
+
+                    <button type="submit" id="btnSalvar" class="btn-gravar">Registrar Ocorrência</button>
+                </form>
+
+                <hr class="linha-divisoria">
+
+                <h3>📊 Análise Rápida</h3>
+                <div id="estatisticas"></div>
+                <canvas id="graficoBairros" width="100" height="80" style="margin-top: 10px;"></canvas>
+            </div>
+            <div id="map-container">
+                <div id="meuMapa"></div>
+            </div>
+        </div>
+        <!-- ================== ABA 2 - SOBRE O PROJETO ================== -->
+        <div id="aba-sobre" class="conteudo-aba aba-rolavel">
+            <div class="sobre-wrapper">
+
+                <div class="sobre-hero">
+                    <div class="logos-topo">
+                        <img src="assets/puclogo.png" alt="PUC Minas">
+                        <img src="assets/logobetim.png" alt="Prefeitura de Betim">
+                    </div>
+                    <h2>Disque Denúncia Queimadas</h2>
+                    <p class="subtitulo">Plataforma digital de monitoramento de focos de queimada em Betim — um
+                        canal direto entre cidadãos e os órgãos de fiscalização.</p>
+                </div>
+                <div class="sobre-secao">
+                    <h3>O Problema</h3>
+                    <p>A cidade de Betim enfrenta um problema crônico e recorrente com queimadas ilegais em lotes
+                        vagos, terrenos abandonados e áreas verdes. A maior barreira para a resolução é que muitas
+                        dessas ocorrências não são denunciadas de forma oficial ou identificadas a tempo. A ausência
+                        de registros rápidos fomenta a impunidade e dificulta a atuação das autoridades competentes.</p>
+                </div>
+                <div class="sobre-secao">
+                    <h3>A Proposta</h3>
+                    <p>Um sistema web com foco em sustentabilidade que serve como canal direto, seguro e eficiente
+                        entre os cidadãos e os órgãos de fiscalização. Principais funcionalidades:</p>
+                    <ul>
+                        <li>Registro de denúncias de forma simples e rápida;</li>
+                        <li>Ferramenta de geolocalização para informar o local exato da queimada;</li>
+                        <li>Campos para descrever o ocorrido e fazer upload de imagens como prova;</li>
+                        <li>Mural e histórico transparente das ocorrências registradas na cidade.</li>
+                    </ul>
+                </div>
+
+                <div class="sobre-secao">
+                    <h3>Público-Alvo e Impacto Social</h3>
+                    <div class="cards-publico">
+                        <div class="card-publico">
+                            <h4>Cidadãos e Moradores</h4>
+                            <p>Pessoas que presenciam as queimadas e desejam um meio prático e acessível para agir
+                                em prol do meio ambiente e da saúde de suas famílias.</p>
+                        </div>
+                        <div class="card-publico">
+                            <h4>Autoridades e Órgãos Públicos</h4>
+                            <p>Corpo de Bombeiros, Prefeitura, Defesa Civil e órgãos ambientais — recebem um banco
+                                de dados centralizado e analítico para mapear regiões críticas e planejar ações.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faixa-parceria">
+                    <h3>Projeto Acadêmico em Parceria com a Prefeitura de Betim</h3>
+                    <p>Trabalho Interdisciplinar Extensionista da PUC Minas Betim, desenvolvido a partir de uma
+                        necessidade real da comunidade e com o aval da Prefeitura para a coleta de registros e fotos.</p>
+                    <div class="logos-parceria">
+                        <img src="assets/puclogo.png" alt="PUC Minas">
+                        <img src="assets/logobetim.png" alt="Prefeitura de Betim">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- ================== ABA 3 - DASHBOARD ================== -->
+        <div id="aba-dashboard" class="conteudo-aba aba-rolavel">
+            <div class="dashboard-wrapper">
+
+                <h2>Dashboard de Ocorrências</h2>
+                <p class="intro">Relatório detalhado dos focos de queimada registrados na cidade.</p>
+
+                <div class="cards-resumo">
+                    <div class="card-kpi">
+                        <div class="valor" id="kpiOcorrencias">0</div>
+                        <div class="rotulo">Ocorrências registradas</div>
+                    </div>
+                    <div class="card-kpi">
+                        <div class="valor" id="kpiFocos">0</div>
+                        <div class="rotulo">Total de focos</div>
+                    </div>
+                    <div class="card-kpi">
+                        <div class="valor" id="kpiBairros">0</div>
+                        <div class="rotulo">Bairros afetados</div>
+                    </div>
+                </div>
+                <div class="painel-branco">
+                    <h3>Relatório por Bairro</h3>
+                    <canvas id="graficoRelatorio" height="90"></canvas>
+                </div>
+
+                <div class="painel-branco">
+                    <h3>Histórico de Ocorrências</h3>
+                    <table class="tabela-ocorrencias">
+                        <thead>
+                            <tr>
+                                <th>Bairro / Região</th>
+                                <th>Endereço</th>
+                                <th>Focos</th>
+                                <th>Data / Hora</th>
+                                <th>Foto</th>
+                            </tr>
+                        </thead>
+                        <tbody id="corpoTabela">
+                            <tr><td colspan="5" class="aviso-vazio">Carregando...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="painel-branco">
+                    <h3>📷 Quadro da Vergonha</h3>
+                    <p class="intro">Fotos dos locais de queimada registradas pelos cidadãos e pela fiscalização.</p>
+                    <div class="galeria-vergonha" id="galeriaVergonha"></div>
+                </div>
+
+            </div>
+        </div>
+        <!-- ================= ABA 4 - SATÉLITE NASA ================= -->
+        <div id="aba-nasa" class="conteudo-aba">
+            <div class="nasa-info">
+                <h3>🛰️ Radar NASA FIRMS</h3>
+                <p>Camada WMS consumindo dados térmicos dos satélites MODIS e VIIRS em tempo real.</p>
+                <p style="color: #27ae60; font-size: 13px; font-weight: bold;">✅ Conectado via Chave API.</p>
+            </div>
+            <div id="mapaNasa"></div>
+        </div>
+    </main>
+    <footer>
+        <div class="footer-conteudo">
+            <div class="footer-logos">
+                <img src="assets/puclogo.png" alt="PUC Minas">
+                <img src="assets/logobetim.png" alt="Prefeitura de Betim">
+            </div>
+            <div class="footer-texto">
+                <strong>Disque Denúncia Queimadas — Betim / MG</strong><br>
+                &copy; 2026 — Trabalho Interdisciplinar Extensionista (Aplicações para Sustentabilidade)<br>
+                PUC Minas — Campus Betim | Grupo 01
+            </div>
+        </div>
+    </footer>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>

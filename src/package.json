@@ -1,0 +1,17 @@
+{
+  "name": "disque-denuncia-queimadas",
+  "version": "2.0.0",
+  "description": "Plataforma de monitoramento de focos de queimada em Betim/MG - PUC Minas",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@libsql/client": "^0.14.0",
+    "express": "^4.21.2",
+    "multer": "^2.0.1"
+  }
+}

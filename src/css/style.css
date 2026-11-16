@@ -1,0 +1,685 @@
+/* ============================================================
+   Disque Denúncia Queimadas - Betim
+   Folha de estilos principal
+   ============================================================ */
+
+/* === VARIÁVEIS DE COR === */
+:root {
+    --azul-escuro: #1a252f;
+    --azul-medio: #2c3e50;
+    --azul-claro: #34495e;
+    --vermelho: #d32f2f;
+    --vermelho-escuro: #b71c1c;
+    --laranja: #f57c00;
+    --verde: #2e7d32;
+    --cinza-fundo: #eceff1;
+    --cinza-texto: #555;
+}
+
+/* === RESET E LAYOUT PRINCIPAL === */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: var(--cinza-fundo);
+}
+
+/* === HEADER / NAVBAR === */
+header {
+    background: var(--azul-escuro);
+    color: white;
+    padding: 12px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    z-index: 2000;
+    flex-shrink: 0;
+}
+
+.marca {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.marca .logo-fogo {
+    font-size: 26px;
+}
+
+.marca h1 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.marca span {
+    display: block;
+    font-size: 11px;
+    font-weight: 400;
+    color: #9fb3c8;
+    letter-spacing: 0.5px;
+}
+
+nav {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.btn-aba {
+    background: var(--azul-medio);
+    color: white;
+    border: 1px solid var(--azul-claro);
+    padding: 10px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    transition: 0.25s;
+}
+
+.btn-aba:hover {
+    background: var(--azul-claro);
+}
+
+.btn-aba.ativa {
+    background: var(--vermelho);
+    border-color: var(--vermelho);
+}
+
+/* === FOOTER === */
+footer {
+    background: var(--azul-escuro);
+    color: #bdc3c7;
+    flex-shrink: 0;
+    z-index: 2000;
+}
+
+.footer-conteudo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 30px;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.footer-logos {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.footer-logos img {
+    height: 38px;
+    background: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.footer-texto {
+    font-size: 12px;
+    text-align: right;
+    line-height: 1.6;
+}
+
+.footer-texto strong {
+    color: white;
+}
+
+/* === CONTAINER DAS ABAS === */
+main {
+    flex: 1;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+}
+
+.conteudo-aba {
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+
+.conteudo-aba.ativa {
+    display: flex;
+}
+
+/* Abas com conteúdo de texto rolam verticalmente */
+.conteudo-aba.aba-rolavel.ativa {
+    display: block;
+    overflow-y: auto;
+}
+
+/* ============================================================
+   ABA 1 - INÍCIO (mapa local + formulário + mini dashboard)
+   ============================================================ */
+#sidebar {
+    width: 400px;
+    background: white;
+    padding: 25px;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    flex-shrink: 0;
+}
+
+#sidebar h2 {
+    color: var(--vermelho);
+    margin-top: 0;
+    font-size: 22px;
+}
+
+#sidebar p.intro {
+    color: var(--cinza-texto);
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: 600;
+    margin-top: 15px;
+    display: block;
+    color: #333;
+    font-size: 14px;
+}
+
+select,
+input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 15px;
+    font-family: inherit;
+}
+
+input[type="file"] {
+    padding: 7px;
+    font-size: 13px;
+    background: #fafafa;
+}
+
+button.btn-gravar {
+    width: 100%;
+    padding: 12px;
+    margin-top: 22px;
+    background: var(--vermelho);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+button.btn-gravar:hover {
+    background: var(--vermelho-escuro);
+}
+
+button.btn-gravar:disabled {
+    background: #999;
+    cursor: not-allowed;
+}
+
+.linha-divisoria {
+    margin: 25px 0;
+    border: 0;
+    border-top: 1px solid #eee;
+}
+
+.card-total {
+    background: #fff3f3;
+    padding: 15px;
+    border-radius: 6px;
+    border-left: 5px solid var(--vermelho);
+    margin-bottom: 20px;
+}
+
+.card-total strong {
+    color: var(--vermelho);
+    display: block;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+
+.card-total span {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+#map-container {
+    flex: 1;
+    height: 100%;
+    position: relative;
+}
+
+#meuMapa {
+    height: 100%;
+    width: 100%;
+}
+
+/* ============================================================
+   ABA 2 - SOBRE O PROJETO
+   ============================================================ */
+.sobre-wrapper {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 50px 30px 70px;
+}
+
+.sobre-hero {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.sobre-hero .logos-topo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 35px;
+    margin-bottom: 25px;
+}
+
+.sobre-hero .logos-topo img {
+    height: 80px;
+}
+
+.sobre-hero h2 {
+    color: var(--azul-escuro);
+    font-size: 32px;
+    margin: 0 0 10px;
+}
+
+.sobre-hero .subtitulo {
+    color: var(--cinza-texto);
+    font-size: 16px;
+    margin: 0;
+}
+
+.sobre-secao {
+    background: white;
+    border-radius: 10px;
+    padding: 28px 32px;
+    margin-bottom: 22px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    border-left: 5px solid var(--vermelho);
+}
+
+.sobre-secao h3 {
+    color: var(--vermelho);
+    margin-top: 0;
+    font-size: 19px;
+}
+
+.sobre-secao p {
+    color: #444;
+    line-height: 1.7;
+    font-size: 15px;
+}
+
+.sobre-secao ul {
+    color: #444;
+    line-height: 1.8;
+    font-size: 15px;
+}
+
+.cards-publico {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.card-publico {
+    flex: 1;
+    min-width: 250px;
+    background: #f7f9fb;
+    border-radius: 8px;
+    padding: 20px;
+    border-top: 4px solid var(--azul-medio);
+}
+
+.card-publico h4 {
+    margin: 0 0 8px;
+    color: var(--azul-escuro);
+}
+
+.card-publico p {
+    font-size: 14px;
+    margin: 0;
+}
+
+.faixa-parceria {
+    background: var(--azul-escuro);
+    color: white;
+    border-radius: 10px;
+    padding: 28px 32px;
+    text-align: center;
+    margin-bottom: 22px;
+}
+
+.faixa-parceria h3 {
+    color: white;
+    margin-top: 0;
+}
+
+.faixa-parceria .logos-parceria {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 18px;
+}
+
+.faixa-parceria .logos-parceria img {
+    height: 60px;
+    background: white;
+    padding: 8px 14px;
+    border-radius: 6px;
+}
+
+/* ============================================================
+   ABA 3 - DASHBOARD DETALHADO
+   ============================================================ */
+.dashboard-wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 35px 30px 70px;
+}
+
+.dashboard-wrapper h2 {
+    color: var(--azul-escuro);
+    font-size: 26px;
+    margin: 0 0 6px;
+}
+
+.dashboard-wrapper .intro {
+    color: var(--cinza-texto);
+    margin: 0 0 28px;
+}
+
+.cards-resumo {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.card-kpi {
+    flex: 1;
+    min-width: 180px;
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    border-left: 5px solid var(--vermelho);
+}
+
+.card-kpi .valor {
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--azul-escuro);
+}
+
+.card-kpi .rotulo {
+    font-size: 13px;
+    text-transform: uppercase;
+    color: var(--cinza-texto);
+    margin-top: 4px;
+}
+
+.painel-branco {
+    background: white;
+    border-radius: 10px;
+    padding: 24px 26px;
+    margin-bottom: 26px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.painel-branco h3 {
+    margin-top: 0;
+    color: var(--azul-escuro);
+}
+
+/* Tabela de ocorrências */
+table.tabela-ocorrencias {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+table.tabela-ocorrencias th {
+    background: var(--azul-medio);
+    color: white;
+    text-align: left;
+    padding: 10px 12px;
+}
+
+table.tabela-ocorrencias td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #eee;
+}
+
+table.tabela-ocorrencias tr:nth-child(even) {
+    background: #f7f9fb;
+}
+
+.tag-focos {
+    background: var(--vermelho);
+    color: white;
+    padding: 2px 9px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 12px;
+}
+
+/* Quadro da vergonha (galeria de fotos) */
+.galeria-vergonha {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+}
+
+.foto-card {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+    background: #fff;
+}
+
+.foto-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    display: block;
+}
+
+.foto-card .legenda {
+    padding: 8px 10px;
+    font-size: 12px;
+    color: var(--cinza-texto);
+}
+
+.foto-card .legenda strong {
+    display: block;
+    color: #333;
+    font-size: 13px;
+}
+
+.aviso-vazio {
+    color: #999;
+    font-style: italic;
+}
+
+/* ============================================================
+   ABA 4 - SATÉLITE NASA
+   ============================================================ */
+#mapaNasa {
+    height: 100%;
+    width: 100%;
+}
+
+.nasa-info {
+    position: absolute;
+    top: 20px;
+    left: 50px;
+    background: rgba(255, 255, 255, 0.96);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    width: 350px;
+    border-left: 5px solid #2980b9;
+}
+
+.nasa-info h3 {
+    margin: 0 0 10px;
+    color: var(--azul-medio);
+}
+
+.nasa-info p {
+    font-size: 14px;
+    color: var(--cinza-texto);
+    margin-bottom: 10px;
+}
+
+/* === RESPONSIVO (celular / tablet) === */
+@media (max-width: 860px) {
+    /* No celular a página rola livremente (sem altura fixa de tela) */
+    body {
+        height: auto;
+        min-height: 100vh;
+    }
+
+    main {
+        overflow: visible;
+        height: auto;
+    }
+
+    /* --- HEADER / NAVBAR empilhados --- */
+    header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        padding: 12px 16px;
+    }
+
+    .marca {
+        justify-content: center;
+    }
+
+    .marca h1 {
+        font-size: 17px;
+    }
+
+    nav {
+        justify-content: center;
+    }
+
+    .btn-aba {
+        flex: 1 1 40%;
+        min-width: 120px;
+        padding: 9px 10px;
+        font-size: 13px;
+        text-align: center;
+    }
+
+    /* --- ABAS: tudo em coluna, altura automática --- */
+    .conteudo-aba.ativa {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .conteudo-aba.aba-rolavel.ativa {
+        display: block;
+    }
+
+    /* --- ABA INÍCIO (formulário + mapa) --- */
+    #sidebar {
+        width: 100%;
+        height: auto;
+        overflow: visible;
+        padding: 20px 16px;
+    }
+
+    #map-container {
+        width: 100%;
+        height: 70vh;
+        min-height: 360px;
+        flex: none;
+    }
+
+    /* --- ABA SATÉLITE NASA --- */
+    .nasa-info {
+        position: static;
+        width: auto;
+        margin: 12px;
+        padding: 14px;
+    }
+
+    #mapaNasa {
+        height: 70vh;
+        min-height: 360px;
+    }
+
+    /* --- ABA SOBRE O PROJETO --- */
+    .sobre-wrapper {
+        padding: 30px 16px 50px;
+    }
+
+    .sobre-hero h2 {
+        font-size: 23px;
+    }
+
+    .sobre-hero .logos-topo {
+        gap: 20px;
+    }
+
+    .sobre-hero .logos-topo img {
+        height: 55px;
+    }
+
+    .sobre-secao,
+    .faixa-parceria {
+        padding: 20px 18px;
+    }
+
+    /* --- ABA DASHBOARD --- */
+    .dashboard-wrapper {
+        padding: 25px 16px 50px;
+    }
+
+    .painel-branco {
+        padding: 18px 16px;
+    }
+
+    /* Tabela rola na horizontal quando não couber */
+    table.tabela-ocorrencias {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    /* --- FOOTER empilhado --- */
+    .footer-conteudo {
+        flex-direction: column;
+        text-align: center;
+        padding: 16px;
+        gap: 12px;
+    }
+
+    .footer-texto {
+        text-align: center;
+    }
+}

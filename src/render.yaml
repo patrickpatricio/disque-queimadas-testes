@@ -1,0 +1,10 @@
+# Configuração de deploy para o Render (https://render.com)
+# Ao criar um "Blueprint" no Render apontando para este repositório,
+# o serviço já é configurado automaticamente com estas opções.
+services:
+  - type: web
+    name: disquequeimadas
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start

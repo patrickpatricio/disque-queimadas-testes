@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "Please cite this software using these metadata."
+title: Queimadas
+authors:
+  - family-names: Martins Brito
+    given-names: Arthur Henry
+  - family-names: Braga Perdigão
+    given-names: Italo
+  - family-names: da Cunha
+    given-names: Patrick Patricio
+  - family-names: Gomes
+    given-names: Rafael Ricardo
+  - family-names: Gennaro
+    given-names: Stefano
+  - family-names: Vieira da Costa
+    given-names: Vladimir Valentim
+  - family-names: Pereira Costa
+    given-names: Roselene Henrique 
+    name-suffix: "Professor(a)"
+    affiliation: PUC Minas
+keywords:
+    - Denúncia
+    - Queimadas
+    - Anônimo
+repository-code: https://github.com/ICEI-PUC-Minas-PBE-SI-TI/2026-1-p5-tias-grupo-01-disque-denuncia-queimadas/tree/main
+license: CC-BY-4.0
+version: 1.0.0
+date-released: 2026-06-22

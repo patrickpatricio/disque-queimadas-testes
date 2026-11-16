@@ -1,0 +1,23 @@
+# Dependências (recriadas com "npm install")
+node_modules/
+
+# Credenciais (Turso) - NUNCA enviar ao GitHub
+.env
+
+# Banco de dados local (criado automaticamente ao rodar)
+data/banco.db
+
+# Fotos enviadas pelos usuários
+uploads/*
+!uploads/.gitkeep
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db
+
+.vercel
+
+.env.*
+*.db
+*.db-*
+__pycache__/
