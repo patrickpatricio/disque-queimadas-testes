@@ -8,9 +8,7 @@ test('CT06 - Dashboard sem ocorrências', async () => {
     const arquivo = path.join(__dirname, '../js/app.js');
     const codigo = fs.readFileSync(arquivo, 'utf8');
 
-    const inicio = codigo.indexOf(
-        'function carregarDashboard()'
-    );
+    const inicio = codigo.search(/^function carregarDashboard\(/m);
 
     assert.ok(
         inicio >= 0,

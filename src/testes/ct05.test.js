@@ -8,7 +8,7 @@ test('CT05 - Preservar ordem e dados recebidos', () => {
     const arquivo = path.join(__dirname, '../js/app.js');
     const codigo = fs.readFileSync(arquivo, 'utf8');
 
-    const inicio = codigo.indexOf('function desenharGrafico(');
+    const inicio = codigo.search(/^function desenharGrafico\(/m);
     const fim = codigo.indexOf(
         '\natualizarMapaEDashboard();',
         inicio

@@ -170,6 +170,59 @@ function desenharGrafico(total, ranking) {
     });
 }
 
+//Função Refatorada
+
+// function desenharGrafico(total, ranking) {
+//     document.getElementById('estatisticas').innerHTML =
+//         `<div class="card-total"><strong>Total de Focos</strong><span>${total} ocorrências ativas</span></div>`;
+
+//     var { labels, dados } = prepararDadosGrafico(ranking, dicBairros);
+
+//     if (meuGrafico) meuGrafico.destroy();
+
+//     meuGrafico = new Chart(
+//         document.getElementById('graficoBairros').getContext('2d'),
+//         {
+//             type: 'bar',
+//             data: {
+//                 labels: labels,
+//                 datasets: [{
+//                     label: 'Focos',
+//                     data: dados,
+//                     backgroundColor: '#d32f2f',
+//                     borderRadius: 4
+//                 }]
+//             },
+//             options: {
+//                 responsive: true,
+//                 plugins: {
+//                     legend: { display: false },
+//                     title: {
+//                         display: true,
+//                         text: 'Top 5 Bairros'
+//                     }
+//                 },
+//                 scales: {
+//                     y: { beginAtZero: true }
+//                 }
+//             }
+//         }
+//     );
+// }
+
+// function prepararDadosGrafico(ranking, bairros) {
+//     var selecionados = ranking.slice(0, 5);
+
+//     return {
+//         labels: selecionados.map(
+//             item => bairros[item.id] || "ID " + item.id
+//         ),
+//         dados: selecionados.map(item => item.focos)
+//     };
+// }
+
+// Fim Função Refatorada
+
 atualizarMapaEDashboard();
 
 // ==========================================================
@@ -219,7 +272,7 @@ function carregarDashboard() {
         .then(lista => {
             if (!Array.isArray(lista)) lista = [];
 
-            // --- KPIs ---
+           // --- KPIs ---
             var totalFocos = lista.reduce((s, o) => s + (o.quantidade || 0), 0);
             var bairrosAfetados = new Set(lista.map(o => o.cd_setor)).size;
 
@@ -235,19 +288,29 @@ function carregarDashboard() {
             });
             var pares = Object.entries(porBairro).sort((a, b) => b[1] - a[1]).slice(0, 8);
 
-            if (graficoRelatorio) graficoRelatorio.destroy();
-            graficoRelatorio = new Chart(document.getElementById('graficoRelatorio').getContext('2d'), {
-                type: 'bar',
-                data: {
-                    labels: pares.map(p => p[0]),
-                    datasets: [{ label: 'Focos registrados', data: pares.map(p => p[1]), backgroundColor: '#f57c00', borderRadius: 4 }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: { legend: { display: false }, title: { display: true, text: 'Focos por bairro (Top 8)' } },
-                    scales: { y: { beginAtZero: true } }
-                }
-            });
+           // Função refatorada
+           
+            // var { totalOcorrencias, totalFocos, bairrosAfetados, pares } = calcularResumoDashboard(lista, dicBairros);
+
+            // document.getElementById('kpiOcorrencias').textContent = totalOcorrencias;
+            // document.getElementById('kpiFocos').textContent = totalFocos;
+            // document.getElementById('kpiBairros').textContent = bairrosAfetados;
+
+            // if (graficoRelatorio) graficoRelatorio.destroy();
+            // graficoRelatorio = new Chart(document.getElementById('graficoRelatorio').getContext('2d'), {
+            //     type: 'bar',
+            //     data: {
+            //         labels: pares.map(p => p[0]),
+            //         datasets: [{ label: 'Focos registrados', data: pares.map(p => p[1]), backgroundColor: '#f57c00', borderRadius: 4 }]
+            //     },
+            //     options: {
+            //         responsive: true,
+            //         plugins: { legend: { display: false }, title: { display: true, text: 'Focos por bairro (Top 8)' } },
+            //         scales: { y: { beginAtZero: true } }
+            //     }
+            // });
+
+            // Fim Função refatorada
 
             // --- Tabela de ocorrências ---
             var corpo = document.getElementById('corpoTabela');
@@ -287,3 +350,36 @@ function carregarDashboard() {
             console.error("Erro ao carregar o dashboard detalhado.", erro);
         });
 }
+
+// Função auxiliar da refatoração
+
+// function calcularResumoDashboard(lista, bairros) {
+//     var totalFocos = lista.reduce(
+//         (soma, ocorrencia) => soma + (ocorrencia.quantidade || 0),
+//         0
+//     );
+
+//     var bairrosAfetados = new Set(
+//         lista.map(o => o.cd_setor)
+//     ).size;
+
+//     var porBairro = {};
+
+//     lista.forEach(o => {
+//         var nome = bairros[o.cd_setor] || ("Região " + o.cd_setor);
+
+//         porBairro[nome] =
+//             (porBairro[nome] || 0) + (o.quantidade || 0);
+//     });
+
+//     var pares = Object.entries(porBairro)
+//         .sort((a, b) => b[1] - a[1])
+//         .slice(0, 8);
+
+//     return {
+//         totalOcorrencias: lista.length,
+//         totalFocos,
+//         bairrosAfetados,
+//         pares
+//     };
+// }
