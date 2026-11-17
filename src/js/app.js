@@ -296,21 +296,22 @@ function carregarDashboard() {
             // document.getElementById('kpiFocos').textContent = totalFocos;
             // document.getElementById('kpiBairros').textContent = bairrosAfetados;
 
-            // if (graficoRelatorio) graficoRelatorio.destroy();
-            // graficoRelatorio = new Chart(document.getElementById('graficoRelatorio').getContext('2d'), {
-            //     type: 'bar',
-            //     data: {
-            //         labels: pares.map(p => p[0]),
-            //         datasets: [{ label: 'Focos registrados', data: pares.map(p => p[1]), backgroundColor: '#f57c00', borderRadius: 4 }]
-            //     },
-            //     options: {
-            //         responsive: true,
-            //         plugins: { legend: { display: false }, title: { display: true, text: 'Focos por bairro (Top 8)' } },
-            //         scales: { y: { beginAtZero: true } }
-            //     }
-            // });
-
             // Fim Função refatorada
+
+            if (graficoRelatorio) graficoRelatorio.destroy();
+            graficoRelatorio = new Chart(document.getElementById('graficoRelatorio').getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: pares.map(p => p[0]),
+                    datasets: [{ label: 'Focos registrados', data: pares.map(p => p[1]), backgroundColor: '#f57c00', borderRadius: 4 }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { display: false }, title: { display: true, text: 'Focos por bairro (Top 8)' } },
+                    scales: { y: { beginAtZero: true } }
+                }
+            });
+
 
             // --- Tabela de ocorrências ---
             var corpo = document.getElementById('corpoTabela');
