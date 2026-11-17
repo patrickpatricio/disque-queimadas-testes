@@ -150,6 +150,7 @@ function atualizarMapaEDashboard() {
         });
 }
 
+// Função que será Refatorada
 function desenharGrafico(total, ranking) {
     document.getElementById('estatisticas').innerHTML =
         `<div class="card-total"><strong>Total de Focos</strong><span>${total} ocorrências ativas</span></div>`;
@@ -169,6 +170,7 @@ function desenharGrafico(total, ranking) {
         options: { responsive: true, plugins: { legend: { display: false }, title: { display: true, text: 'Top 5 Bairros' } }, scales: { y: { beginAtZero: true } } }
     });
 }
+// Função que será Refatorada
 
 //Função Refatorada
 
@@ -272,7 +274,8 @@ function carregarDashboard() {
         .then(lista => {
             if (!Array.isArray(lista)) lista = [];
 
-           // --- KPIs ---
+            // Função que será refatorada
+            // --- KPIs ---
             var totalFocos = lista.reduce((s, o) => s + (o.quantidade || 0), 0);
             var bairrosAfetados = new Set(lista.map(o => o.cd_setor)).size;
 
@@ -288,7 +291,9 @@ function carregarDashboard() {
             });
             var pares = Object.entries(porBairro).sort((a, b) => b[1] - a[1]).slice(0, 8);
 
-           // Função refatorada
+           // Função que será refatorada
+
+            // Função refatorada
            
             // var { totalOcorrencias, totalFocos, bairrosAfetados, pares } = calcularResumoDashboard(lista, dicBairros);
 
