@@ -151,77 +151,77 @@ function atualizarMapaEDashboard() {
 }
 
 // Função que será Refatorada
-function desenharGrafico(total, ranking) {
-    document.getElementById('estatisticas').innerHTML =
-        `<div class="card-total"><strong>Total de Focos</strong><span>${total} ocorrências ativas</span></div>`;
-
-    var labels = [], dados = [], lim = ranking.length > 5 ? 5 : ranking.length;
-
-    for (var i = 0; i < lim; i++) {
-        labels.push(dicBairros[ranking[i].id] || "ID " + ranking[i].id);
-        dados.push(ranking[i].focos);
-    }
-
-    if (meuGrafico) meuGrafico.destroy();
-
-    meuGrafico = new Chart(document.getElementById('graficoBairros').getContext('2d'), {
-        type: 'bar',
-        data: { labels: labels, datasets: [{ label: 'Focos', data: dados, backgroundColor: '#d32f2f', borderRadius: 4 }] },
-        options: { responsive: true, plugins: { legend: { display: false }, title: { display: true, text: 'Top 5 Bairros' } }, scales: { y: { beginAtZero: true } } }
-    });
-}
-// Função que será Refatorada
-
-//Função Refatorada
-
 // function desenharGrafico(total, ranking) {
 //     document.getElementById('estatisticas').innerHTML =
 //         `<div class="card-total"><strong>Total de Focos</strong><span>${total} ocorrências ativas</span></div>`;
 
-//     var { labels, dados } = prepararDadosGrafico(ranking, dicBairros);
+//     var labels = [], dados = [], lim = ranking.length > 5 ? 5 : ranking.length;
+
+//     for (var i = 0; i < lim; i++) {
+//         labels.push(dicBairros[ranking[i].id] || "ID " + ranking[i].id);
+//         dados.push(ranking[i].focos);
+//     }
 
 //     if (meuGrafico) meuGrafico.destroy();
 
-//     meuGrafico = new Chart(
-//         document.getElementById('graficoBairros').getContext('2d'),
-//         {
-//             type: 'bar',
-//             data: {
-//                 labels: labels,
-//                 datasets: [{
-//                     label: 'Focos',
-//                     data: dados,
-//                     backgroundColor: '#d32f2f',
-//                     borderRadius: 4
-//                 }]
-//             },
-//             options: {
-//                 responsive: true,
-//                 plugins: {
-//                     legend: { display: false },
-//                     title: {
-//                         display: true,
-//                         text: 'Top 5 Bairros'
-//                     }
-//                 },
-//                 scales: {
-//                     y: { beginAtZero: true }
-//                 }
-//             }
-//         }
-//     );
+//     meuGrafico = new Chart(document.getElementById('graficoBairros').getContext('2d'), {
+//         type: 'bar',
+//         data: { labels: labels, datasets: [{ label: 'Focos', data: dados, backgroundColor: '#d32f2f', borderRadius: 4 }] },
+//         options: { responsive: true, plugins: { legend: { display: false }, title: { display: true, text: 'Top 5 Bairros' } }, scales: { y: { beginAtZero: true } } }
+//     });
 // }
+// Função que será Refatorada
 
-// function prepararDadosGrafico(ranking, bairros) {
-//     var selecionados = ranking.slice(0, 5);
+//Função Refatorada
 
-//     return {
-//         labels: selecionados.map(
-//             item => bairros[item.id] || "ID " + item.id
-//         ),
-//         dados: selecionados.map(item => item.focos)
-//     };
-// }
+function desenharGrafico(total, ranking) {
+    document.getElementById('estatisticas').innerHTML =
+        `<div class="card-total"><strong>Total de Focos</strong><span>${total} ocorrências ativas</span></div>`;
+
+    var { labels, dados } = prepararDadosGrafico(ranking, dicBairros);
+
+    if (meuGrafico) meuGrafico.destroy();
+
+    meuGrafico = new Chart(
+        document.getElementById('graficoBairros').getContext('2d'),
+        {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Focos',
+                    data: dados,
+                    backgroundColor: '#d32f2f',
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: 'Top 5 Bairros'
+                    }
+                },
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        }
+    );
+}
+
+function prepararDadosGrafico(ranking, bairros) {
+    var selecionados = ranking.slice(0, 5);
+
+    return {
+        labels: selecionados.map(
+            item => bairros[item.id] || "ID " + item.id
+        ),
+        dados: selecionados.map(item => item.focos)
+    };
+}
 
 // Fim Função Refatorada
 
@@ -276,30 +276,30 @@ function carregarDashboard() {
 
             // Função que será refatorada
             // --- KPIs ---
-            var totalFocos = lista.reduce((s, o) => s + (o.quantidade || 0), 0);
-            var bairrosAfetados = new Set(lista.map(o => o.cd_setor)).size;
+            // var totalFocos = lista.reduce((s, o) => s + (o.quantidade || 0), 0);
+            // var bairrosAfetados = new Set(lista.map(o => o.cd_setor)).size;
 
-            document.getElementById('kpiOcorrencias').textContent = lista.length;
-            document.getElementById('kpiFocos').textContent = totalFocos;
-            document.getElementById('kpiBairros').textContent = bairrosAfetados;
+            // document.getElementById('kpiOcorrencias').textContent = lista.length;
+            // document.getElementById('kpiFocos').textContent = totalFocos;
+            // document.getElementById('kpiBairros').textContent = bairrosAfetados;
 
-            // --- Gráfico de relatório: focos por bairro ---
-            var porBairro = {};
-            lista.forEach(o => {
-                var nome = dicBairros[o.cd_setor] || ("Região " + o.cd_setor);
-                porBairro[nome] = (porBairro[nome] || 0) + (o.quantidade || 0);
-            });
-            var pares = Object.entries(porBairro).sort((a, b) => b[1] - a[1]).slice(0, 8);
+            // // --- Gráfico de relatório: focos por bairro ---
+            // var porBairro = {};
+            // lista.forEach(o => {
+            //     var nome = dicBairros[o.cd_setor] || ("Região " + o.cd_setor);
+            //     porBairro[nome] = (porBairro[nome] || 0) + (o.quantidade || 0);
+            // });
+            // var pares = Object.entries(porBairro).sort((a, b) => b[1] - a[1]).slice(0, 8);
 
            // Função que será refatorada
 
             // Função refatorada
            
-            // var { totalOcorrencias, totalFocos, bairrosAfetados, pares } = calcularResumoDashboard(lista, dicBairros);
+            var { totalOcorrencias, totalFocos, bairrosAfetados, pares } = calcularResumoDashboard(lista, dicBairros);
 
-            // document.getElementById('kpiOcorrencias').textContent = totalOcorrencias;
-            // document.getElementById('kpiFocos').textContent = totalFocos;
-            // document.getElementById('kpiBairros').textContent = bairrosAfetados;
+            document.getElementById('kpiOcorrencias').textContent = totalOcorrencias;
+            document.getElementById('kpiFocos').textContent = totalFocos;
+            document.getElementById('kpiBairros').textContent = bairrosAfetados;
 
             // Fim Função refatorada
 
@@ -357,35 +357,35 @@ function carregarDashboard() {
         });
 }
 
-// Função auxiliar da refatoração
+//Função auxiliar da refatoração
 
-// function calcularResumoDashboard(lista, bairros) {
-//     var totalFocos = lista.reduce(
-//         (soma, ocorrencia) => soma + (ocorrencia.quantidade || 0),
-//         0
-//     );
+function calcularResumoDashboard(lista, bairros) {
+    var totalFocos = lista.reduce(
+        (soma, ocorrencia) => soma + (ocorrencia.quantidade || 0),
+        0
+    );
 
-//     var bairrosAfetados = new Set(
-//         lista.map(o => o.cd_setor)
-//     ).size;
+    var bairrosAfetados = new Set(
+        lista.map(o => o.cd_setor)
+    ).size;
 
-//     var porBairro = {};
+    var porBairro = {};
 
-//     lista.forEach(o => {
-//         var nome = bairros[o.cd_setor] || ("Região " + o.cd_setor);
+    lista.forEach(o => {
+        var nome = bairros[o.cd_setor] || ("Região " + o.cd_setor);
 
-//         porBairro[nome] =
-//             (porBairro[nome] || 0) + (o.quantidade || 0);
-//     });
+        porBairro[nome] =
+            (porBairro[nome] || 0) + (o.quantidade || 0);
+    });
 
-//     var pares = Object.entries(porBairro)
-//         .sort((a, b) => b[1] - a[1])
-//         .slice(0, 8);
+    var pares = Object.entries(porBairro)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 8);
 
-//     return {
-//         totalOcorrencias: lista.length,
-//         totalFocos,
-//         bairrosAfetados,
-//         pares
-//     };
-// }
+    return {
+        totalOcorrencias: lista.length,
+        totalFocos,
+        bairrosAfetados,
+        pares
+    };
+}
