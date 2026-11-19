@@ -173,7 +173,6 @@ function atualizarMapaEDashboard() {
 // Função que será Refatorada
 
 //Função Refatorada
-
 function desenharGrafico(total, ranking) {
     document.getElementById('estatisticas').innerHTML =
         `<div class="card-total"><strong>Total de Focos</strong><span>${total} ocorrências ativas</span></div>`;
@@ -294,7 +293,6 @@ function carregarDashboard() {
            // Função que será refatorada
 
             // Função refatorada
-           
             var { totalOcorrencias, totalFocos, bairrosAfetados, pares } = calcularResumoDashboard(lista, dicBairros);
 
             document.getElementById('kpiOcorrencias').textContent = totalOcorrencias;
@@ -358,7 +356,6 @@ function carregarDashboard() {
 }
 
 //Função auxiliar da refatoração
-
 function calcularResumoDashboard(lista, bairros) {
     var totalFocos = lista.reduce(
         (soma, ocorrencia) => soma + (ocorrencia.quantidade || 0),
