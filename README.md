@@ -13,10 +13,10 @@ Além da visualização geográfica dos focos de incêndio, a aplicação permit
 ## Integrantes
 
 * Arthur Henry Martins Brito
-* Ítalo Braga Perdigao 
 * Patrick Patricio da Cunha
 * Rafael Ricardo Gomes
 * Stefano Gennaro
+* Vitor Lucas Firmino Rezende
 * Vladimir Valentim Vieira da Costa
 
 ## Professor
